@@ -36,6 +36,7 @@ RUN mkdir -p ~/.pg_ctl/bin ~/.pg_ctl/sockets \
 
 ENV PGHOSTADDR="127.0.0.1"
 ENV PGDATABASE="postgres"
+ENV DATABASE_URL="postgresql://gitpod@localhost"
 
 # Upgrade Node
 
@@ -58,12 +59,15 @@ COPY .vscode/start_mysql.sh /etc/mysql/mysql-bashrc-launch.sh
 # Start MySQL when we log in
 # Add aliases
 
-RUN echo 'alias run="python3 $GITPOD_REPO_ROOT/manage.py runserver 0.0.0.0:8000"' >> ~/.bashrc && \
-    echo 'alias heroku_config=". $GITPOD_REPO_ROOT/.vscode/heroku_config.sh"' >> ~/.bashrc && \
-    echo 'alias python=python3' >> ~/.bashrc && \
-    echo 'alias pip=pip3' >> ~/.bashrc && \
-    echo 'alias font_fix="python3 $GITPOD_REPO_ROOT/.vscode/font_fix.py"' >> ~/.bashrc && \
-    echo ". /etc/mysql/mysql-bashrc-launch.sh" >> ~/.bashrc
+# RUN echo 'alias run="python3 $GITPOD_REPO_ROOT/manage.py runserver 0.0.0.0:8000"' >> ~/.bashrc && \
+#    echo 'alias heroku_config=". $GITPOD_REPO_ROOT/.vscode/heroku_config.sh"' >> ~/.bashrc && \
+#    echo 'alias python=python3' >> ~/.bashrc && \
+#    echo 'alias pip=pip3' >> ~/.bashrc && \
+#    echo 'alias font_fix="python3 $GITPOD_REPO_ROOT/.vscode/font_fix.py"' >> ~/.bashrc && \
+#    echo ". /etc/mysql/mysql-bashrc-launch.sh" >> ~/.bashrc
+
+RUN printf "\n# Auto-start PostgreSQL server.\n[[ \$(pg_ctl status | grep PID) ]] || pg_start > /dev/null\n" >> /home/gitpod/.bashrc.d/200-postgresql-launch
+RUN chmod +x /home/gitpod/.bashrc.d/200-postgresql-launch
 
 # Local environment variables
 # C9USER is temporary to allow the MySQL Gist to run
