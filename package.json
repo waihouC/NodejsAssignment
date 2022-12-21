@@ -24,10 +24,11 @@
     "pg": "^8.8.0",
     "pg-hstore": "^2.3.4",
     "pgtools": "^0.3.2",
-    "sequelize": "^6.27.0",
+    "sequelize": "^6.28.0",
     "wax-on": "^1.2.2"
   },
   "devDependencies": {
     "sequelize-cli": "^6.5.2"
-  }
+  },
+  "keywords": []
 }

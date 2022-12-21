@@ -2,16 +2,22 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('books', {
-      id: {
+    await queryInterface.createTable('author_books', {
+      author_books_id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
+      author_id: {
         allowNull: false,
-        type: Sequelize.STRING
+        onDelete: 'cascade',
+        type: Sequelize.INTEGER
+      },
+      book_id: {
+        allowNull: false,
+        onDelete: 'cascade',
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
@@ -24,6 +30,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('books');
+    await queryInterface.dropTable('author_books');
   }
 };

@@ -1,21 +1,26 @@
 const express = require('express');
-const db = require('./sequelize/models/index')
+const { sequelize } = require('./sequelize/models')
 
 let app = express();
 
-async function connectToPostgres() {
+async function connectToDB() {
     try {
-        await db.sequelize.authenticate();
+        await sequelize.authenticate();
         console.log('Connection has been established successfully.');
       } catch (error) {
-        console.error('Unable to connect to the database:', error);
+        console.error('Unable to connect to database:', error);
       }
 }
 
-connectToPostgres(); 
-// app.get('/', function(req,res){
-//     res.send("<h1>Hello from Express</h1>");
-// })
+connectToDB(); 
+
+const mainRoutes = require('./routes/main');
+
+async function main() {
+    app.use('/', mainRoutes);
+}
+
+main();
 
 app.listen(3000, () => {
     console.log("Server started.");
