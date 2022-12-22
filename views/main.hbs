@@ -1,0 +1,23 @@
+{{#extends 'base'}}
+
+{{#block 'content'}}
+
+<form method="POST">
+    <div class="row">
+        <div class="col-3">
+            <select class="form-select form-select" name="country">
+                <option selected>Select a country</option>
+                {{#each countryInfo}}
+                <option value="{{@key}}">{{this}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div class="col-2">
+            <input type="submit" class="btn btn-secondary" value="Search"/>
+        </div>
+    </div>
+</form>
+
+{{/block}}
+
+{{/extends}}

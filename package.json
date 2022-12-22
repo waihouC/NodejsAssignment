@@ -4,7 +4,9 @@
   "description": "![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -17,9 +19,10 @@
   },
   "homepage": "https://github.com/waihouC/gitpod-full-template#readme",
   "dependencies": {
+    "country-list": "^2.3.0",
     "express": "^4.18.2",
     "handlebars-helpers": "^0.10.0",
-    "hbs": "^4.1.2",
+    "hbs": "^4.2.0",
     "mysql2": "^2.3.0",
     "pg": "^8.8.0",
     "pg-hstore": "^2.3.4",
