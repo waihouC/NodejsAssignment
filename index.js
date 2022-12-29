@@ -1,19 +1,25 @@
 const express = require('express');
-const hbs = require("hbs");
-const wax = require("wax-on");
-const { sequelize } = require('./sequelize/models')
+const hbs = require('hbs');
+const wax = require('wax-on');
+const { sequelize } = require('./sequelize/models');
 
 let app = express();
 app.set("view engine", "hbs");
 wax.on(hbs.handlebars);
-wax.setLayoutPath("./views/layouts");
+wax.setLayoutPath('./views/layouts');
+
+app.use(
+  express.urlencoded({
+      extended: false
+  })
+);
 
 async function connectToDB() {
     try {
         await sequelize.authenticate();
-        console.log('Connection has been established successfully.');
+        console.log("Connection has been established successfully.");
       } catch (error) {
-        console.error('Unable to connect to database:', error);
+        console.error("Unable to connect to database: ", error);
       }
 }
 

@@ -5,9 +5,9 @@
 <form method="POST">
     <div class="row">
         <div class="col-3">
-            <select class="form-select form-select" name="country">
+            <select class="form-select" name="code">
                 <option selected>Select a country</option>
-                {{#each countryInfo}}
+                {{#each countryCode}}
                 <option value="{{@key}}">{{this}}</option>
                 {{/each}}
             </select>
@@ -17,7 +17,11 @@
         </div>
     </div>
 </form>
-
+<div class="row">
+    <div class="col-12">
+        {{result}}
+    </div>
+</div>
 {{/block}}
 
 {{/extends}}
